@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+      body{
+          background-color: rgb(120, 225, 233);
+      }
+      .container{
+          margin-top: 200px;
+          border: 1px solid black;
+          border-radius: 10px;
+          padding: 10px;
+      }
+      .custom-navbar {
+            background-color:cornflowerblue;
+            font-size: 20px;
+        }
+  </style>
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navegacion</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="getall.html">Personajes</a>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="getbyid.html">Buscar Personaje</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!--Altasocio-->
+    <div class="container">
+        <h2>Alta</h2>
+        <form id="form">
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-12">
+                  <label for="inputNombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="inputNombre" name="nombre">
+                </div>
+              </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-12">
+                  <label for="inputOcup" class="form-label">Ocupacion</label>
+                  <input type="text" class="form-control" id="inputOcup" name="ocupacion">
+                </div>
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-12">
+                    <label for="inputLoc" class="form-label">Localizacion</label>
+                    <input type="text" class="form-control" id="inputLoc" name="location">
+                </div>
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-12">
+                    <label for="inputEdad" class="form-label">Edad</label>
+                    <input type="text" class="form-control" id="inputEdad" name="edad">
+                </div>
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-12">
+                    <label for="inputGenero" class="form-label">Genero</label>
+                    <input type="text" class="form-control" id="inputGenero" name="genero">
+                </div>
+            </div>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">Estado</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="vivo" value="option1">
+                        <label class="form-check-label" for="vivo">
+                            Vivo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="dead" value="option2">
+                        <label class="form-check-label" for="dead">
+                            Muerto
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row mt-3 mb-3">
+              <div class="col-12">
+                <label for="selectCargar" class="form-label">Anime</label>
+                <select class="form-select" aria-label="Default select example" id="selectCargar" name="idObjeto">
+                  <option disabled selected>Seleccionar</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-3 mb-3">
+              <div class="col-12 d-grid">
+                <button type="submit" class="btn btn-primary" id="submit">Dar de Alta</button>
+              </div>
+            </div>
+          </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        //Validar y guardar nombre, apellido y dni en localStorage
+        $(document).ready(function(){
+
+            cargarCombo();
+
+            $("#form").validate({
+                rules:{
+                    nombre:{
+                        required:true
+                    },
+                    ocupacion:{
+                        required:true
+                    },
+                    location:{
+                        required:true
+                    },
+                    edad:{
+                        required:true
+                    },
+                    genero:{
+                        required:true
+                    }
+                },
+                messages:{
+                    nombre:{
+                        required:"El campo es requerido"
+                    },
+                    ocupacion:{
+                        required:"El campo es requerido"
+                    },
+                    location:{
+                        required:"El campo es requerido"
+                    },
+                    edad:{
+                        required:"El campo es requerido"
+                    },
+                    genero:{
+                        required:"El campo es requerido"
+                    }
+                },
+                submitHandler:function(form){
+                  var nombrev = $("#inputNombre").val();
+                  var ocupv = $("#inputOcup").val();
+                  var locationv = $("#inputLoc").val();
+                  var edadv = $("#inputEdad").val();
+                  var generov = $("#inputGenero").val();
+                  var anime = $("#selectCargar").val();
+                  var estado = checkSelection();
+
+                    function checkSelection(){
+                        const vivo = document.getElementById('vivo');
+
+                        if (vivo.checked) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+
+                  var nuevaAlta = {
+                      nombrepost:nombrev,
+                      ocupost:ocupv,
+                      locpost:locationv,
+                      edadpost:edadv,
+                      generopost:generov,
+                      vivopost: estado,
+                      id_animepost:anime
+                  }
+
+                  //Le paso el socio al fetch
+                  altaPers(nuevaAlta)
+                    .then(function (response) {
+                        console.log('Respuesta del servidor:', response);
+                    })
+                    .catch(function (error) {
+                    console.error('Error al registrar:', error);
+                    });
+                    window.location.href = "getall.html"
+                }
+            });
+          });
+
+            function cargarCombo(){
+                fetch('https://localhost:7271/GetAnimes')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.data && Array.isArray(data.data)) {
+                             mostrarObjetos(data.data);
+                        } else {
+                            console.error('La respuesta del servidor no trae lo pedido:', data);
+                            }
+                        })
+                        .catch(error => console.error('Error al obtener data:', error));
+                        }
+                    
+                        function mostrarObjetos(objeto) {
+                            var selectCombo = $('#selectCargar');
+                            objeto.forEach(function (objeto) {
+                            var option = $('<option></option>');
+                            option.attr('value', objeto.id_anime);
+                            option.text(objeto.animedto);
+                            selectCombo.append(option);
+                            });
+                        }
+
+                        //Fetch del post socio
+                      function altaPers(data){
+                        return fetch('https://localhost:7271/PostPersonaje', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                      }         
+    </script>
+</body>
+</html>
